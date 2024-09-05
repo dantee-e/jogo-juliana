@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class semaforo : MonoBehaviour
 {
-    public bool eixo = 0;
+    public bool eixo = false;
     Transform detectorPlayer, luzVermelha, luzAmarela, luzVerde;
     // Start is called before the first frame update
 
