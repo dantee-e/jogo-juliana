@@ -34,7 +34,7 @@ public class BusDriving : MonoBehaviour
 
     IEnumerator updateMovement(float currentAcceleration, float currentBreakForce, float currentTurnAngle)
     {
-        yield return new WaitForSeconds(0.2f); // mudar isso para definir o quao doido ta 
+        yield return new WaitForSeconds(0f); // mudar isso para definir o quao doido ta 
         frontRight.motorTorque = currentAcceleration;
         frontLeft.motorTorque = currentAcceleration;
         backRight.motorTorque = currentAcceleration;
