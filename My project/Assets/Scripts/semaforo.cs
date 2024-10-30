@@ -2,49 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class semaforo : MonoBehaviour
+
+
+
+
+public class Semaforo : MonoBehaviour
 {
-    public bool eixo = false;
-    Transform detectorPlayer, luzVermelha, luzAmarela, luzVerde;
-    // Start is called before the first frame update
+    float intervalo = 5f;
+    public bool vert_horiz;
+    public int currentState;
 
-
-    IEnumerator changeState(){
-        int estado; // 1 - vermelho // 2 - amarelo // 3 - verde
-        if (eixo)
-            estado = 3;
-        else
-            estado = 1;
-
-        while(true){
-            if (estado == 3){ // se ta verde
-                yield return new WaitForSeconds(8f); 
-                estado = 2;
-                yield return new WaitForSeconds(2f);
-                estado = 1;
-            }
-            else if(estado == 1){ // se ta vermelho
-                yield return new WaitForSeconds(10f);
-                estado = 3;
-            }
+    public enum State
+	{
+		Red,
+		Green,
+		Yellow
+	};
+    void ChangeTag(string newTag)
+    {
+        // Verifica se a tag que você deseja atribuir existe antes de aplicar
+        if (newTag != null && !string.IsNullOrEmpty(newTag) && gameObject != null)
+        {
+            gameObject.tag = newTag;
         }
     }
 
+    // Start is called before the first frame update
     void Start()
     {
-        detectorPlayer = transform.Find("Plane");
-        luzVermelha = transform.Find("luzVermelha");
-        luzAmarela = transform.Find("luzAmarela");
-        luzVerde = transform.Find("luzVerde");
-        detectorPlayer.GetComponent<Renderer>().enabled = false;
-
-        StartCoroutine(changeState());
-        
+        if (vert_horiz)
+            ChangeTag("red_light");
+        else
+            ChangeTag("green_light");
+    
+        StartCoroutine(ChangeStateLight());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator ChangeStateLight()
     {
-        
+        while (true)
+        {
+            if (tag == "green_light")
+            {
+                yield return new WaitForSeconds(2*intervalo);
+                ChangeTag("yellow_light");
+            }
+            else if (tag == "yellow_light")
+            {
+                yield return new WaitForSeconds(intervalo);
+                ChangeTag("red_light");
+            }
+            else if (tag == "red_light")
+            {
+                yield return new WaitForSeconds(3*intervalo);
+                ChangeTag("green_light");
+            };
+        }
     }
+
 }

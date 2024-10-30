@@ -58,8 +58,6 @@ public class BusDriving : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         
-        print("Acceleration = " + currentAcceleration);
-        print("BreakForce = " + currentBreakForce);
         if(verticalInput>0){
             currentBreakForce = 0;
             currentAcceleration = acceleration * verticalInput;
