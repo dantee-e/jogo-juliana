@@ -8,11 +8,12 @@ TagManager:
   - green_light
   - yellow_light
   - red_light
+  - Jogador
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - NoCollision
   - Water
   - UI
   - 
