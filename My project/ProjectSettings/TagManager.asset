@@ -5,11 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Jogador
+  - green_light
+  - yellow_light
+  - red_light
+  - Jogador
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - NoCollision
+  - NoCollisionNoCollision
   - Water
   - UI
   - 
