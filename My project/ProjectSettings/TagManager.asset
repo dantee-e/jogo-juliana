@@ -4,12 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Obstacle
+  - Jogador
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - NoCollision
   - Water
   - UI
   - 
