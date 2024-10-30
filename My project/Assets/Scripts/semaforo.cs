@@ -1,40 +1,40 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-
-
-
 
 public class Semaforo : MonoBehaviour
 {
     float intervalo = 5f;
     public bool vert_horiz;
     public int currentState;
-
     public enum State
-	{
-		Red,
-		Green,
-		Yellow
-	};
+    {
+        Red,
+        Green,
+        Yellow
+    };
+
+    // Referência ao objeto filho que representa a luz do semáforo
+    private GameObject planoFilho;
+
     void ChangeTag(string newTag)
     {
-        // Verifica se a tag que você deseja atribuir existe antes de aplicar
-        if (newTag != null && !string.IsNullOrEmpty(newTag) && gameObject != null)
+        // Verifica se a referência do filho e a tag são válidas antes de aplicar
+        if (planoFilho != null && !string.IsNullOrEmpty(newTag))
         {
-            gameObject.tag = newTag;
+            planoFilho.tag = newTag;
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
+        // Atribui o objeto filho específico, por exemplo "luzAmarela"
+        planoFilho = transform.Find("Plane").gameObject;
+
         if (vert_horiz)
             ChangeTag("red_light");
         else
             ChangeTag("green_light");
-    
+
         StartCoroutine(ChangeStateLight());
     }
 
@@ -42,22 +42,21 @@ public class Semaforo : MonoBehaviour
     {
         while (true)
         {
-            if (tag == "green_light")
+            if (planoFilho.tag == "green_light")
             {
-                yield return new WaitForSeconds(2*intervalo);
+                yield return new WaitForSeconds(2 * intervalo);
                 ChangeTag("yellow_light");
             }
-            else if (tag == "yellow_light")
+            else if (planoFilho.tag == "yellow_light")
             {
                 yield return new WaitForSeconds(intervalo);
                 ChangeTag("red_light");
             }
-            else if (tag == "red_light")
+            else if (planoFilho.tag == "red_light")
             {
-                yield return new WaitForSeconds(3*intervalo);
+                yield return new WaitForSeconds(3 * intervalo);
                 ChangeTag("green_light");
-            };
+            }
         }
     }
-
 }

@@ -8,46 +8,57 @@ public class NPCCar : MonoBehaviour
     BoxCollider boxCollider;
 
     // Distância do raycast
-    public float raycastDistance = 1000f;
+    public float raycastDistance = 10f;
+    bool movement;
+    public float velocidade = 15f;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.AddComponent<Rigidbody>();
         boxCollider = gameObject.AddComponent<BoxCollider>();
-        rb.isKinematic = true;
+        //rb.isKinematic = true;
+        movement = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 origem = transform.position + transform.forward * 1.5f; // Move o ponto de origem um pouco à frente do carro
-        Vector3 direcao = transform.forward;
+        Vector3 origem = transform.position + new Vector3(0, 1, 0) + transform.forward;
+        Vector3 direcao = transform.forward * raycastDistance;
 
         int layerMask = 1 << 8;
         layerMask = ~layerMask;
-        Ray ray = new Ray(transform.position +new Vector3(0, 0.3f, 0), transform.forward);
+        Ray ray = new Ray(origem, direcao);
         RaycastHit hit;
 
-        Debug.DrawRay(ray.origin, ray.direction*10);
+        Debug.DrawRay(ray.origin, ray.direction*raycastDistance);
 
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log("Objeto detectado: " + hit.collider.name);
-
+            print("Colidindo");
             // Aqui você pode adicionar lógica, como parar o carro ao detectar um obstáculo
             if (hit.collider.CompareTag("green_light"))
             {
-                print("green light");
+                movement = true;
             }
             else if (hit.collider.CompareTag("yellow_light"))
             {
-                print("yellow light");
+                if (hit.distance > 26)
+                    movement = false;
+                else
+                    movement = true;
             }
             else if (hit.collider.CompareTag("red_light"))
             {
-                print("red light");
+                print("Parando");
+                movement = false;
             }
         }
+
+        if (movement)
+            rb.velocity = transform.forward * velocidade;
+        else
+            rb.velocity = Vector3.zero;
     }
 }
