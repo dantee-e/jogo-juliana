@@ -9,6 +9,8 @@ TagManager:
   - yellow_light
   - red_light
   - Jogador
+  - carro
+  - Obstacle
   layers:
   - Default
   - TransparentFX
