@@ -9,9 +9,18 @@ public class Checkpoint : MonoBehaviour
         // Verifica se o objeto que entrou no checkpoint é o player
         if (other.gameObject.tag == "Jogador")
         {
-            // Você pode adicionar um efeito visual ou som aqui para indicar que o checkpoint foi ativado
-            // Debug.Log("Checkpoint alcançado!");
+            // Efeito visual ou som para indicar o checkpoint alcançado
             print("Checkpoint alcançado!");
+
+            // Procura o objeto com a tag "Objetivo"
+            GameObject objetivo = GameObject.FindWithTag("Objetivo");
+            
+            // Se encontrar o objetivo, destrói a instância
+            if (objetivo != null)
+            {
+                Destroy(objetivo);
+                print("Objetivo destruído!");
+            }
 
             // Chama o GameManager para completar o nível
             // GameManager.instance.CompleteLevel();
