@@ -10,17 +10,31 @@ public class NPCCar : MonoBehaviour
     // Distância do raycast
     public float raycastDistance = 10f;
     bool movement;
-    public float velocidade = 5f;
+    public float velocidade = 7f;
     private bool isWaiting;
 
+    [SerializeField]
+    private Material[] carMaterials;
+    private Renderer carRenderer;
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.AddComponent<Rigidbody>();
         boxCollider = gameObject.AddComponent<BoxCollider>();
-        //rb.isKinematic = true;
         movement = true;
         isWaiting = false;
+
+        carRenderer = GetComponent<Renderer>();
+
+        if (carMaterials.Length > 0)
+        {
+            int randomIndex = Random.Range(0, carMaterials.Length);
+            carRenderer.material = carMaterials[randomIndex];
+        }
+        else
+        {
+            Debug.LogWarning("Nenhum material foi atribuído ao array carMaterials.");
+        }
     }
 
     void teleportToSpawn(RaycastHit hit){
@@ -52,6 +66,24 @@ public class NPCCar : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit) && hit.distance < raycastDistance)
         {
+             Vector3 hitNormal = hit.normal;
+
+            // Direção do raycast (oposta à direção do impacto)
+            Vector3 rayDirection = -ray.direction;
+
+            // Verifica o lado do impacto
+            if (Vector3.Dot(hitNormal, rayDirection) > 0)
+            {
+                Debug.Log("Raycast atingiu o lado correto.");
+            }
+            else
+            {
+                Debug.Log("Raycast atingiu o lado oposto.");
+            }
+
+
+
+
             if ((hit.collider.CompareTag("carro") || hit.collider.CompareTag("red_light"))
                 && hit.distance < 5 )
             {
@@ -61,12 +93,10 @@ public class NPCCar : MonoBehaviour
             }
             else if (hit.collider.CompareTag("green_light"))
             {
-                print("luz verde");
                 movement = true;
             }
             else if (hit.collider.CompareTag("yellow_light"))
             {
-                print("luz amarela");
                 if (hit.distance > 5)
                     movement = false;
             }
