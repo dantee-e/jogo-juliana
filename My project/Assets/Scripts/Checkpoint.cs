@@ -22,7 +22,17 @@ public class Checkpoint : MonoBehaviour
                 print("Objetivo destruído!");
             }
 
-            // Chama o GameManager para completar o nível
+            // Procura o objeto com a tag "Waypoint" (a seta)
+            GameObject seta = GameObject.FindWithTag("Waypoint");
+
+            // Se encontrar a seta, destrói a instância
+            if (seta != null)
+            {
+                Destroy(seta);
+                print("Seta guia destruída!");
+            }
+
+            // Chama o GameManager para completar o nível (se necessário)
             // GameManager.instance.CompleteLevel();
         }
     }
