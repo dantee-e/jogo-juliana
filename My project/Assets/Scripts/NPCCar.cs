@@ -13,12 +13,22 @@ public class NPCCar : MonoBehaviour
     public float velocidade = 7f;
     private bool isWaiting;
 
+    public float ajusteDirecao = 2f;  // Força do ajuste automático da direção
+    public LayerMask pistaLayer;  // Layer que representa a pista
+
     [SerializeField]
     private Material[] carMaterials;
     private Renderer carRenderer;
+
+
+    private Quaternion starting_rotation;
+    private bool crava_x;
+
     // Start is called before the first frame update
     void Start()
     {
+        starting_rotation = transform.rotation;
+
         rb = gameObject.AddComponent<Rigidbody>();
         boxCollider = gameObject.AddComponent<BoxCollider>();
         movement = true;
@@ -51,9 +61,16 @@ public class NPCCar : MonoBehaviour
         }
         return;
     }
+    void AjustarDirecao()
+    {
+        transform.rotation = starting_rotation;
+    
+    }
     // Update is called once per frame
     void Update()
     {
+        AjustarDirecao();
+
         Vector3 origem = transform.position + new Vector3(0, 1, 0) + transform.forward;
         Vector3 direcao = transform.forward * raycastDistance;
 
@@ -66,24 +83,6 @@ public class NPCCar : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit) && hit.distance < raycastDistance)
         {
-             Vector3 hitNormal = hit.normal;
-
-            // Direção do raycast (oposta à direção do impacto)
-            Vector3 rayDirection = -ray.direction;
-
-            // Verifica o lado do impacto
-            if (Vector3.Dot(hitNormal, rayDirection) > 0)
-            {
-                Debug.Log("Raycast atingiu o lado correto.");
-            }
-            else
-            {
-                Debug.Log("Raycast atingiu o lado oposto.");
-            }
-
-
-
-
             if ((hit.collider.CompareTag("carro") || hit.collider.CompareTag("red_light"))
                 && hit.distance < 5 )
             {
@@ -97,7 +96,7 @@ public class NPCCar : MonoBehaviour
             }
             else if (hit.collider.CompareTag("yellow_light"))
             {
-                if (hit.distance > 5)
+                // if (hit.distance > 5)
                     movement = false;
             }
             else if (hit.collider.CompareTag("Finish"))
@@ -120,6 +119,8 @@ public class NPCCar : MonoBehaviour
             rb.velocity = transform.forward * velocidade;
         else
             rb.velocity = Vector3.zero;
+
+        
     }
 
     IEnumerator DelayBeforeMoving()

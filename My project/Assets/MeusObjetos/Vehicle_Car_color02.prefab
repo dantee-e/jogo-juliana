@@ -98,6 +98,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raycastDistance: 10
   velocidade: 7
+  ajusteDirecao: 2
+  pistaLayer:
+    serializedVersion: 2
+    m_Bits: 64
   carMaterials:
   - {fileID: 2100000, guid: 5e29c495f3970b64f9d09ce50f034ed4, type: 2}
   - {fileID: 2100000, guid: 28c4d6fc3a6598a49bd5947f62155562, type: 2}
