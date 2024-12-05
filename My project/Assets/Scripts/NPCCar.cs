@@ -20,13 +20,14 @@ public class NPCCar : MonoBehaviour
     private Material[] carMaterials;
     private Renderer carRenderer;
 
+    public bool debug = false;
+
 
     private Quaternion starting_rotation;
     private bool crava_x;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         starting_rotation = transform.rotation;
 
         rb = gameObject.AddComponent<Rigidbody>();
@@ -61,14 +62,60 @@ public class NPCCar : MonoBehaviour
         }
         return;
     }
-    void AjustarDirecao()
-    {
+    void AjustarDirecao(){
         transform.rotation = starting_rotation;
     
     }
-    // Update is called once per frame
-    void Update()
-    {
+
+
+
+    void dealWithRayCast(Ray ray, RaycastHit hit){
+        GameObject hitObject = hit.collider.gameObject;
+
+        if (hitObject.CompareTag("red_light") || hitObject.CompareTag("yellow_light") || hitObject.CompareTag("green_light")){
+            float carRotationY = transform.eulerAngles.y;
+            float planeRotationY = hitObject.transform.eulerAngles.y;
+
+            float angleDifference = Mathf.Abs(Mathf.DeltaAngle(carRotationY, planeRotationY));
+
+            float oppositeMargin = 10f;
+
+            if (debug){
+                print("Angle difference: " + angleDifference);
+            }
+
+            // If the car and light are facing opposite directions (roughly 180 degrees apart)
+            if (Mathf.Abs(angleDifference - 180f) <= oppositeMargin) {
+                switch (hitObject.tag){
+                    case "green_light":
+                        movement = true; // Car can move if the light is green
+                        if (debug)
+                            print("Green light: Car continues moving.");
+                        break;
+                    case "yellow_light":
+                        movement = false; // Car should stop if the light is yellow
+                        if (debug)
+                            print("Yellow light: Car stops.");
+                        break;
+                    case "red_light":
+                        movement = false; // Car should stop if the light is red
+                        if (debug)
+                            print("Red light: Car stops.");
+                        break;
+                }
+            }
+        }
+        else if (hit.collider.CompareTag("carro") && hit.distance < 5){
+            movement = false;
+            isWaiting = false;
+            StopAllCoroutines();
+        }
+        else if (hit.collider.CompareTag("Finish")){
+            teleportToSpawn(hit);
+        }
+    }
+
+    void Update(){
         AjustarDirecao();
 
         Vector3 origem = transform.position + new Vector3(0, 1, 0) + transform.forward;
@@ -83,38 +130,18 @@ public class NPCCar : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit) && hit.distance < raycastDistance)
         {
-            if ((hit.collider.CompareTag("carro") || hit.collider.CompareTag("red_light"))
-                && hit.distance < 5 )
-            {
-                movement = false;
-                isWaiting = false;
-                StopAllCoroutines();
-            }
-            else if (hit.collider.CompareTag("green_light"))
-            {
-                movement = true;
-            }
-            else if (hit.collider.CompareTag("yellow_light"))
-            {
-                // if (hit.distance > 5)
-                    movement = false;
-            }
-            else if (hit.collider.CompareTag("Finish"))
-            {
-                print("teleporting");
-                teleportToSpawn(hit);
-            }
+            dealWithRayCast(ray, hit);
         }
         else
         {
-            // Inicia a corrotina de delay apenas uma vez, se o carro não estiver esperando
+            // inicia a corrotina de delay apenas uma vez, se o carro nao estiver esperando
             if (!isWaiting && !movement)
             {
                 StartCoroutine(DelayBeforeMoving());
             }
         }
 
-        // Aplica movimento
+        // aplica movimento
         if (movement && !isWaiting)
             rb.velocity = transform.forward * velocidade;
         else
@@ -123,8 +150,7 @@ public class NPCCar : MonoBehaviour
         
     }
 
-    IEnumerator DelayBeforeMoving()
-    {
+    IEnumerator DelayBeforeMoving(){
         isWaiting = true;
         yield return new WaitForSeconds(1.2f); // Espera 1 segundo
         movement = true;
