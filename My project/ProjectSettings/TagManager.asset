@@ -12,6 +12,7 @@ TagManager:
   - carro
   - Obstacle
   - Objetivo
+  - Waypoint
   layers:
   - Default
   - TransparentFX
