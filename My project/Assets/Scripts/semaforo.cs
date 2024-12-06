@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Semaforo : MonoBehaviour
 {
-    float intervalo = 5f;
+    float intervalo = 7f;
     public bool vert_horiz;
     public int currentState;
     public enum State
@@ -29,6 +29,7 @@ public class Semaforo : MonoBehaviour
     {
         // Atribui o objeto filho específico, por exemplo "luzAmarela"
         planoFilho = transform.Find("Plane").gameObject;
+        planoFilho.GetComponent<Renderer>().enabled = false;
 
         if (vert_horiz)
             ChangeTag("red_light");

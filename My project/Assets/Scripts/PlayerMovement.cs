@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BusDriving : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
 
     [SerializeField] WheelCollider frontRight;

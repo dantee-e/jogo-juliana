@@ -12,7 +12,7 @@ TagManager:
   - carro
   - Obstacle
   - Objetivo
-  - Waypoint
+  - pista
   layers:
   - Default
   - TransparentFX
@@ -20,7 +20,7 @@ TagManager:
   - NoCollisionNoCollision
   - Water
   - UI
-  - 
+  - pista
   - 
   - 
   - 
