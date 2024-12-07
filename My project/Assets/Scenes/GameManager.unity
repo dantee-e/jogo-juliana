@@ -180,6 +180,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameGameScene: cidades_juncao
+  mainMenuSceneName: MainMenuScene
+  mainMenuObjectName: MainMenu
+  mainMenuPrefab: {fileID: 5445656689433851011, guid: 3fe2794a9614431438cd59f051c3e8b2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
