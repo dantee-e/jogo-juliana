@@ -6,9 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/GameManager.unity
+    guid: d4c4db8cf3776bcac9cbd4d159160b69
+  - enabled: 1
+    path: Assets/Scenes/cidades_juncao.unity
+    guid: b0a97f7d0c9474c9ea237d49e8725d25
+  - enabled: 1
     path: Assets/Scenes/MainMenuScene.unity
     guid: 3e73388f79b1c4c40be739b33677779a
   - enabled: 1
-    path: Assets/Scenes/fase_2.unity
-    guid: 279a5e7b3c1e73e41a4fcee5e9269c3b
+    path: Assets/Scenes/Time Animation.unity
+    guid: ad460cf591dff2f4a9a4cb98795ced36
+  - enabled: 1
+    path: Assets/Scenes/Crash Animation.unity
+    guid: fdbc83c5ba8ee1544bb2be2f0957f5d9
   m_configObjects: {}
