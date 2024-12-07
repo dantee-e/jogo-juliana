@@ -1,18 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start no jogo
+    public UnityEvent sinalJogar;
+    public UnityEvent sinalSair;
+
+    public void sendSinal(string sinal)
+    {
+        switch(sinal){
+            case "jogar":
+                sinalJogar?.Invoke();
+                break;
+            case "sair":
+                sinalSair?.Invoke();
+                break;
+        }
+    }
+
     public void Jogar() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        sendSinal("jogar");
     }
 
     // Fechar o jogo
     public void Sair() {
-        Application.Quit();
-        Debug.Log("Jogador decidiu quitar");
+        sendSinal("sair");
     }
 }
