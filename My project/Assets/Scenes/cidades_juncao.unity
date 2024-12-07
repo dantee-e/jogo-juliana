@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: de1d750fefeeac642bf9b11a3978ccf5, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -676,6 +676,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f670b5943e9bb5d9885ba4ad224b1b97, type: 3}
+--- !u!1001 &3997919980141314982
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2676854846781219325, guid: 3bdce3fe243c1ca4e8846b3867d82a58, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -417.92133
+      objectReference: {fileID: 0}
+    - target: {fileID: 2676854846781219325, guid: 3bdce3fe243c1ca4e8846b3867d82a58, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -792.1906
+      objectReference: {fileID: 0}
+    - target: {fileID: 2676854846781219325, guid: 3bdce3fe243c1ca4e8846b3867d82a58, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1887.8848
+      objectReference: {fileID: 0}
+    - target: {fileID: 2676854846781219325, guid: 3bdce3fe243c1ca4e8846b3867d82a58, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2676854846781219325, guid: 3bdce3fe243c1ca4e8846b3867d82a58, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2676854846781219325, guid: 3bdce3fe243c1ca4e8846b3867d82a58, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2676854846781219325, guid: 3bdce3fe243c1ca4e8846b3867d82a58, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2676854846781219325, guid: 3bdce3fe243c1ca4e8846b3867d82a58, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2676854846781219325, guid: 3bdce3fe243c1ca4e8846b3867d82a58, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2676854846781219325, guid: 3bdce3fe243c1ca4e8846b3867d82a58, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591980681120576576, guid: 3bdce3fe243c1ca4e8846b3867d82a58, type: 3}
+      propertyPath: m_Name
+      value: SkyManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3bdce3fe243c1ca4e8846b3867d82a58, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -686,3 +743,4 @@ SceneRoots:
   - {fileID: 683769389}
   - {fileID: 1337994502}
   - {fileID: 658488903}
+  - {fileID: 3997919980141314982}
