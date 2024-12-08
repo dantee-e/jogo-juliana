@@ -20,7 +20,7 @@ public class NPCCar : MonoBehaviour
     private Material[] carMaterials;
     private Renderer carRenderer;
 
-    public bool debug = false;
+    public bool deebug = false;
 
 
     private Quaternion starting_rotation;
@@ -80,7 +80,7 @@ public class NPCCar : MonoBehaviour
 
             float oppositeMargin = 10f;
 
-            if (debug){
+            if (deebug){
                 print("Angle difference: " + angleDifference);
             }
 
@@ -89,17 +89,17 @@ public class NPCCar : MonoBehaviour
                 switch (hitObject.tag){
                     case "green_light":
                         movement = true; // Car can move if the light is green
-                        if (debug)
+                        if (deebug)
                             print("Green light: Car continues moving.");
                         break;
                     case "yellow_light":
                         movement = false; // Car should stop if the light is yellow
-                        if (debug)
+                        if (deebug)
                             print("Yellow light: Car stops.");
                         break;
                     case "red_light":
                         movement = false; // Car should stop if the light is red
-                        if (debug)
+                        if (deebug)
                             print("Red light: Car stops.");
                         break;
                 }

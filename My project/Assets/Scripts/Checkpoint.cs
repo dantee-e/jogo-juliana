@@ -49,11 +49,11 @@ public class Checkpoint : MonoBehaviour
             // Verifica se há mais posições para mover o objetivo
             if (contadorMovimentos < posicoes.Length - 1 && objetivo != null)
             {
-               contadorMovimentos++; // Incrementa antes de mover
-               objetivo.transform.position = posicoes[contadorMovimentos]; // Move o objetivo
+                contadorMovimentos++; // Incrementa antes de mover
+                objetivo.transform.position = posicoes[contadorMovimentos]; // Move o objetivo
                 tempoRestante = 90f; // Reseta o tempo
 
-               print($"Objetivo movido para a posição {contadorMovimentos}!");
+                print($"Objetivo movido para a posição {contadorMovimentos}!");
             }
             else if (contadorMovimentos >= posicoes.Length - 1 && objetivo != null)
             {
