@@ -13,7 +13,7 @@ public class CollisionDetect : MonoBehaviour
         {
             collisions++;
             print("Colidiu com o ambiente: " + c.gameObject.tag + " Colisões: " + collisions);
-
+            
             // Inicia o cooldown para detectar a próxima colisão
             StartCoroutine(Cooldown());
         }

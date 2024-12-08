@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float breakingForce = 1000f;
     [SerializeField] float maxTurnAngle = 15f;
 
-
+    public float alcool_no_sangue = 0.0f;
 
     private Rigidbody rb;
 
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator updateMovement(float currentAcceleration, float currentBreakForce, float currentTurnAngle)
     {
-        yield return new WaitForSeconds(0f); // mudar isso para definir o quao doido ta 
+        yield return new WaitForSeconds(alcool_no_sangue); // mudar isso para definir o quao doido ta 
         frontRight.motorTorque = currentAcceleration;
         frontLeft.motorTorque = currentAcceleration;
         backRight.motorTorque = currentAcceleration;
