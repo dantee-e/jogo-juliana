@@ -4,10 +4,29 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    public float tempoRestante; // Variável pública para controle do tempo restante
     private int contadorMovimentos = 0; // Contador de mudanças de posição
     private Vector3[] posicoes; // Array de posições predefinidas para o objeto
     private GameObject objetivo;
+
+    /*
+    GameObject hud;
+    GameObject textTempo, textPontos;
+
+    // retorna true se o player ainda tem pontos
+    bool changePoints(int pontos){
+        if (textPontos!=null){
+            textPontos.GetComponent<TMPro.TextMeshProUGUI>().text = "Pontos: " + (pontos*10).ToString();
+        }
+        if (pontos != 0)
+            return true;
+        return false;
+    }
+
+    void Start(){
+        hud = gameObject.transform.Find("HUD").gameObject;
+        textTempo = hud.transform.Find("Tempo").gameObject;
+        textPontos = hud.transform.Find("Pontuacao").gameObject;
+    }*/
 
     void Start()
     {
@@ -18,8 +37,7 @@ public class Checkpoint : MonoBehaviour
             new Vector3(-230, 333, 1594)
         };
 
-        // Tempo inicial configurado (ajustável no Inspector ou em outro script)
-        tempoRestante = 120f;
+        
 
         // Procura o objetivo no início
         objetivo = GameObject.FindWithTag("Objetivo");
@@ -31,15 +49,7 @@ public class Checkpoint : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        // Reseta o tempo quando o objetivo muda de posição
-        if (tempoRestante > 0)
-        {
-            tempoRestante -= Time.deltaTime;
-            // print("Tempo restante: " + tempoRestante);
-        }
-    }
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -51,7 +61,6 @@ public class Checkpoint : MonoBehaviour
             {
                 contadorMovimentos++; // Incrementa antes de mover
                 objetivo.transform.position = posicoes[contadorMovimentos]; // Move o objetivo
-                tempoRestante = 90f; // Reseta o tempo
 
                 print($"Objetivo movido para a posição {contadorMovimentos}!");
             }

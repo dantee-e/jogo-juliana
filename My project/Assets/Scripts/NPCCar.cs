@@ -20,7 +20,7 @@ public class NPCCar : MonoBehaviour
     private Material[] carMaterials;
     private Renderer carRenderer;
 
-    public bool deebug = false;
+    private bool deebug = false;
 
 
     private Quaternion starting_rotation;
@@ -86,26 +86,34 @@ public class NPCCar : MonoBehaviour
 
             // If the car and light are facing opposite directions (roughly 180 degrees apart)
             if (Mathf.Abs(angleDifference - 180f) <= oppositeMargin) {
+                
                 switch (hitObject.tag){
                     case "green_light":
                         movement = true; // Car can move if the light is green
                         if (deebug)
                             print("Green light: Car continues moving.");
                         break;
+
                     case "yellow_light":
-                        movement = false; // Car should stop if the light is yellow
+                        if (hit.distance<5)
+                            movement = true;
+                        else
+                            movement = false;
                         if (deebug)
                             print("Yellow light: Car stops.");
                         break;
+
                     case "red_light":
-                        movement = false; // Car should stop if the light is red
+                        movement = false;
                         if (deebug)
                             print("Red light: Car stops.");
                         break;
+
+
                 }
             }
         }
-        else if (hit.collider.CompareTag("carro") && hit.distance < 5){
+        else if ((hit.collider.CompareTag("carro") || hit.collider.CompareTag("Jogador")) && hit.distance < 5){
             movement = false;
             isWaiting = false;
             StopAllCoroutines();
