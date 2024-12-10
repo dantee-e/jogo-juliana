@@ -42,9 +42,10 @@ public class ViewManager : MonoBehaviour
         else
             Debug.Log("Player!!!");
         CollisionDetect playerScriptCollisions = player.GetComponent<CollisionDetect>();
+        PlayerMovement playerScriptMovement = player.GetComponent<PlayerMovement>();
 
         playerScriptCollisions.noPoints.AddListener(() => noPoints());
-        playerScriptCollisions.noTime.AddListener(() => noTime());
+        playerScriptMovement.noTime.AddListener(() => noTime());
 
         
     }

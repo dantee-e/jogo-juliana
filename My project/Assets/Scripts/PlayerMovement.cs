@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -22,10 +23,17 @@ public class PlayerMovement : MonoBehaviour
     Transform instrucoes;
     Transform acceptButton;
 
+    GameObject textTempo;
+
     float currentAcceleration = 0;
     float currentBreakForce = 0;
     float currentTurnAngle = 0;
 
+    public UnityEvent noTime;
+    public int tempo = 120;
+    public int acrescimoTempoObjetivo = 90;
+
+    int objetivoNum = 0;
 
 
 
@@ -74,11 +82,38 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void chegouObjetivo(){
+        tempo = 90;
+        newTutorial("checkpoint numero " + tempo.ToString());
+    }
+
+
+    private bool isRunning;
+    private IEnumerator updateTime(){
+        isRunning = true;
+        while (isRunning)
+        {
+            // se acabou o tempo
+            if (tempo==0){
+                print("acabou tempo");
+                noTime?.Invoke();
+            }
+
+            tempo -= 1;
+            textTempo.GetComponent<TMPro.TextMeshProUGUI>().text = "Tempo Restante: " + tempo.ToString();
+            yield return new WaitForSeconds(1f);
+        }
+    }
  
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
+        hud = gameObject.transform.Find("HUD");
+        textTempo = hud.gameObject.transform.Find("Tempo").gameObject;
+        
+
+        StartCoroutine(updateTime());
+
         foreach (Transform child in transform) {
             if (child.name == "HUD") {
                 hud = child;
@@ -117,8 +152,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         
@@ -137,4 +171,7 @@ public class PlayerMovement : MonoBehaviour
             
         StartCoroutine(updateMovement(currentAcceleration, currentBreakForce, currentTurnAngle));
     }
+
+
+    
 }

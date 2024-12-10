@@ -8,16 +8,17 @@ public class CollisionDetect : MonoBehaviour
     private bool canDetectCollision = true; // pro cooldown
 
     private int deducoes = 0;
-    public int tempo = 120;
-    public int acrescimoTempoObjetivo = 90;
+    
 
     public int max_deducoes = 3;
 
     GameObject hud;
-    GameObject textTempo, textPontos;
+    GameObject textPontos;
 
     public UnityEvent noPoints;
-    public UnityEvent noTime;
+    
+
+    PlayerMovement playerMovementScript;
 
     // retorna true se o player ainda tem pontos
     bool changePoints(int deducoes){
@@ -31,10 +32,9 @@ public class CollisionDetect : MonoBehaviour
 
     void Start(){
         hud = gameObject.transform.Find("HUD").gameObject;
-        textTempo = hud.transform.Find("Tempo").gameObject;
         textPontos = hud.transform.Find("Pontuacao").gameObject;
 
-        StartCoroutine(updateTime());
+        playerMovementScript = gameObject.GetComponent<PlayerMovement>();
     }
 
     void OnCollisionEnter(Collision c){
@@ -53,7 +53,7 @@ public class CollisionDetect : MonoBehaviour
 
     void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "Objetivo"){
-            tempo = acrescimoTempoObjetivo;
+            playerMovementScript.chegouObjetivo();
         }
 
         else if (other.gameObject.tag == "red_light"){
@@ -69,22 +69,7 @@ public class CollisionDetect : MonoBehaviour
         }
     }
 
-    private bool isRunning;
-    private IEnumerator updateTime(){
-        isRunning = true;
-        while (isRunning)
-        {
-            //Se acabou o tempo
-            if (tempo==0){
-                print("acabou tempo");
-                noTime?.Invoke();
-            }
-
-            tempo -= 1;
-            textTempo.GetComponent<TMPro.TextMeshProUGUI>().text = "Tempo Restante: " + tempo.ToString();
-            yield return new WaitForSeconds(1f);
-        }
-    }
+    
 
     private IEnumerator Cooldown(){
         canDetectCollision = false;
