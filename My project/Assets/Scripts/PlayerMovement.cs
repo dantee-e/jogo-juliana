@@ -35,7 +35,32 @@ public class PlayerMovement : MonoBehaviour
 
     int objetivoNum = 0;
 
-    string[] historia = { "Apple", "Banana", "Cherry" };
+
+/*
+É tarde de sábado, véspera de Natal. Você está saindo do "Bar do Tatu", onde passou a tarde com seu amigo Dante. Apesar de ter se divertido, agora é hora de enfrentar um desafio emocionante: correr contra o tempo para garantir que a ceia de Natal com sua família aconteça!
+
+Mas o trajeto não será fácil. Você tem três tarefas cruciais a cumprir antes de chegar em casa:
+1️⃣ Deixar Dante na casa dele – Afinal, amigos ajudam amigos!
+2️⃣ Buscar o peru da ceia de Natal – Porque sem ele, a festa perde a magia!
+3️⃣ Chegar em casa a tempo e vivo – Para provar que não foi só "comprar cigarro".
+
+No caminho, obstáculos e trânsito desafiarão suas habilidades. Cuidado! Cada colisão tira pontos de sua pontuação total. Se seus pontos chegarem a zero, seu carro entra em combustão e o Natal vira fumaça – literalmente.
+*/
+
+    string contexto = "
+    É tarde de sábado, véspera de Natal. Você está saindo do Bar do Tatu, onde passou a tarde com a rapazeada. Depois ter se divertido, você se lembra de que não comprou o peru pra ceia de natal! Resta correr contra o tempo para garantir que a ceia de Natal com sua família aconteça.\n
+    O trajeto não será fácil. Você tem três tarefas a cumprir antes de chegar em casa:\n
+    1. Deixar Dante na casa dele\n
+    2.Buscar o peru da ceia de Natal\n
+    3. Chegar em casa a tempo e vivo, e provar que não foi comprar cigarro\n\n
+    No caminho, obstáculos e trânsito desafiarão suas habilidades. Cuidado! Cada colisão tira pontos de sua pontuação total. Se seus pontos chegarem a zero, seu carro entra em combustão e o Natal vira fumaça – literalmente."
+
+    string[] historia = {"
+    Dante salta do carro com um sorriso agradecido no rosto. \'Valeu demais, meu parceiro! Você é o cara! Feliz Natal pra nós!\' Ele dá um último aceno antes de desaparecer pela porta de casa.\n
+    Não há tempo a perder. O sol está se pondo, e o próximo destino é o Tauste, para pegar o peru.\n
+    Corra! (Mas obedeça as leis de trânsito)",
+    "O açougueiro do Tauste entrega o peru com um sorriso caloroso, contagiado pelo espírito natalino (ele vai sair mais cedo do trampo) 'Aqui está! O peru está impecável, pronto para sua ceia. Você coloca o peru no banco do passageiro, e passa o cinto nele, esquecendo-se de passar por si mesmo. A adrenalina aumenta, o relógio está correndo, e sua família espera por você. Agora é hora de ir para casa e salvar o Natal (que você mesmo quase estragou)!" 
+    };
 
 
 
