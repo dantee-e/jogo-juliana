@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
 
     int objetivoNum = 0;
 
+    string[] historia = { "Apple", "Banana", "Cherry" };
+
 
 
     public void hideTutorial(){
@@ -127,6 +129,8 @@ public class PlayerMovement : MonoBehaviour
                 acceptButton = child;
             }
         }
+
+        newTutorial(historia[0]);
 
 
         rb = GetComponent<Rigidbody>();
