@@ -4,32 +4,34 @@ using UnityEngine;
 
 public class MyCarSound : MonoBehaviour
 {
-    AudioSource audioSource;
+    private AudioSource[] audioSources;
+    public int engineSoundIndex = 0; // Índice do som do motor
     public float minPitch = 0.05f;
     private float pitchFromCar;
 
-    private PlayerMovement playerMovement; // Referência automática ao PlayerMovement
+    public PlayerMovement playerMovement; // Referência ao PlayerMovement
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.pitch = minPitch;
+        audioSources = GetComponents<AudioSource>();
 
-        // Obtém o PlayerMovement automaticamente
-        playerMovement = GetComponent<PlayerMovement>();
+        if (audioSources.Length == 0)
+        {
+            Debug.LogError("Nenhum AudioSource encontrado neste GameObject.");
+        }
 
         if (playerMovement == null)
         {
-            Debug.LogError("PlayerMovement não foi encontrado no mesmo GameObject. Certifique-se de que o script está presente.");
+            Debug.LogError("PlayerMovement não está atribuído ao MyCarSound. Atribua o componente na inspeção.");
         }
     }
 
     void Update()
     {
-        if (playerMovement != null)
+        if (playerMovement != null && audioSources.Length > engineSoundIndex)
         {
             pitchFromCar = playerMovement.carCurrentSpeed;
-            audioSource.pitch = Mathf.Max(pitchFromCar, minPitch);
+            audioSources[engineSoundIndex].pitch = Mathf.Max(pitchFromCar, minPitch);
         }
     }
 }
