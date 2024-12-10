@@ -20,10 +20,34 @@ public class CollisionDetect : MonoBehaviour
 
     PlayerMovement playerMovementScript;
 
+    private AudioSource collisionSound;
+
+    void Start()
+    {
+        hud = gameObject.transform.Find("HUD").gameObject;
+        textTempo = hud.transform.Find("Tempo").gameObject;
+        textPontos = hud.transform.Find("Pontuacao").gameObject;
+
+        StartCoroutine(updateTime());
+
+        // Configurando o AudioSource de índice 3
+        AudioSource[] audioSources = GetComponents<AudioSource>();
+        if (audioSources.Length > 2)
+        {
+            collisionSound = audioSources[2];
+        }
+        else
+        {
+            Debug.LogWarning("Não há AudioSource de índice 2 no GameObject!");
+        }
+    }
+
     // retorna true se o player ainda tem pontos
-    bool changePoints(int deducoes){
-        if (textPontos!=null){
-            textPontos.GetComponent<TMPro.TextMeshProUGUI>().text = "Pontos: " + ((max_deducoes-deducoes)*10).ToString();
+    bool changePoints(int deducoes)
+    {
+        if (textPontos != null)
+        {
+            textPontos.GetComponent<TMPro.TextMeshProUGUI>().text = "Pontos: " + ((max_deducoes - deducoes) * 10).ToString();
         }
         if (deducoes != max_deducoes)
             return true;
@@ -41,37 +65,65 @@ public class CollisionDetect : MonoBehaviour
         if (canDetectCollision && (c.gameObject.tag == "Ambiente" || c.gameObject.tag == "carro"))
         {
             deducoes++;
+
+            // Toca o som de colisão
+            if (collisionSound != null)
+            {
+                collisionSound.Play();
+            }
             // se zerou os pontos
-            if (!changePoints(deducoes)){
+            if (!changePoints(deducoes))
+            {
                 noPoints?.Invoke();
             }
-            
+
             // cooldown antes da prox colisao
             StartCoroutine(Cooldown());
         }
     }
 
-    void OnTriggerEnter(Collider other){
+    void OnTriggerEnter(Collider other)
+    {
         if (other.gameObject.tag == "Objetivo"){
             playerMovementScript.chegouObjetivo();
         }
 
-        else if (other.gameObject.tag == "red_light"){
+        else if (other.gameObject.tag == "red_light")
+        {
             float carRotationY = transform.eulerAngles.y;
             float planeRotationY = other.transform.eulerAngles.y;
 
             float angleDifference = Mathf.Abs(Mathf.DeltaAngle(carRotationY, planeRotationY));
 
-            if (Mathf.Abs(angleDifference - 180f) < 90f){
+            if (Mathf.Abs(angleDifference - 180f) < 90f)
+            {
                 deducoes++;
                 changePoints(deducoes);
             }
         }
     }
 
-    
+    private bool isRunning;
+    private IEnumerator updateTime()
+    {
+        isRunning = true;
+        while (isRunning)
+        {
+            // Se acabou o tempo
+            if (tempo == 0)
+            {
+                print("acabou tempo");
+                noTime?.Invoke();
+            }
 
-    private IEnumerator Cooldown(){
+            tempo -= 1;
+            textTempo.GetComponent<TMPro.TextMeshProUGUI>().text = "Tempo Restante: " + tempo.ToString();
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    private IEnumerator Cooldown()
+    {
         canDetectCollision = false;
         yield return new WaitForSeconds(1f);
         canDetectCollision = true;

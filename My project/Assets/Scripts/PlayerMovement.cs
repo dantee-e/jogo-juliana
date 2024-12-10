@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     [SerializeField] WheelCollider frontRight;
     [SerializeField] WheelCollider frontLeft;
     [SerializeField] WheelCollider backRight;
@@ -16,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxTurnAngle = 15f;
 
     public float alcool_no_sangue = 0.0f;
+    public float carMaxSpeed = 100f;
+    public float carCurrentSpeed = 0f;
 
     private Rigidbody rb;
 
@@ -161,9 +162,10 @@ No caminho, obstáculos e trânsito desafiarão suas habilidades. Cuidado! Cada 
         rb = GetComponent<Rigidbody>();
     }
 
+    IEnumerator updateMovement(float currentAcceleration, float currentBreakForce, float currentTurnAngle)
+    {
+        yield return new WaitForSeconds(alcool_no_sangue); // alterar para definir o efeito do álcool
 
-    IEnumerator updateMovement(float currentAcceleration, float currentBreakForce, float currentTurnAngle){
-        yield return new WaitForSeconds(alcool_no_sangue); // mudar isso para definir o quao doido ta 
         frontRight.motorTorque = currentAcceleration;
         frontLeft.motorTorque = currentAcceleration;
         backRight.motorTorque = currentAcceleration;
@@ -174,30 +176,36 @@ No caminho, obstáculos e trânsito desafiarão suas habilidades. Cuidado! Cada 
         backRight.brakeTorque = currentBreakForce;
         backLeft.brakeTorque = currentBreakForce;
 
-
-        
         frontLeft.steerAngle = currentTurnAngle;
         frontRight.steerAngle = currentTurnAngle;
     }
 
-    // Update is called once per frame
-    void Update(){
+    void FixedUpdate()
+    {
+        carCurrentSpeed = (rb.velocity.magnitude * 3.6f) / carMaxSpeed; // velocidade atual em relação à velocidade máxima
+    }
+
+    void Update()
+    {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        
-        if(verticalInput>0){
+
+        if (verticalInput > 0)
+        {
             currentBreakForce = 0;
             currentAcceleration = acceleration * verticalInput;
         }
-        else if(verticalInput<0){
+        else if (verticalInput < 0)
+        {
             currentAcceleration = 0;
             currentBreakForce = -breakingForce * verticalInput;
         }
-        else{
-            currentAcceleration = currentBreakForce = 0;    
+        else
+        {
+            currentAcceleration = currentBreakForce = 0;
         }
         currentTurnAngle = maxTurnAngle * horizontalInput;
-            
+
         StartCoroutine(updateMovement(currentAcceleration, currentBreakForce, currentTurnAngle));
     }
 
