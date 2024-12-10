@@ -2212,6 +2212,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8375919074832450614, guid: 7605b0891edfdc34792798d36d9a84f9, type: 3}
   m_PrefabInstance: {fileID: 658488903}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &662701010 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8649824541680987635, guid: 5297f586984850e7c9988cf5ba1d9395, type: 3}
+  m_PrefabInstance: {fileID: 103595749}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47359e802e90650b2bffdd9cc336dc39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &683769389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3071,7 +3082,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1503505998}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 662701010}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: hideTutorial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1503505998
 MonoBehaviour:
   m_ObjectHideFlags: 0

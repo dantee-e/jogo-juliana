@@ -41,7 +41,6 @@ public class CollisionDetect : MonoBehaviour
         if (canDetectCollision && (c.gameObject.tag == "Ambiente" || c.gameObject.tag == "carro"))
         {
             deducoes++;
-
             // se zerou os pontos
             if (!changePoints(deducoes)){
                 noPoints?.Invoke();
@@ -53,8 +52,10 @@ public class CollisionDetect : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other){
-        if (other.gameObject.tag == "Objetivo")
+        if (other.gameObject.tag == "Objetivo"){
             tempo = acrescimoTempoObjetivo;
+        }
+
         else if (other.gameObject.tag == "red_light"){
             float carRotationY = transform.eulerAngles.y;
             float planeRotationY = other.transform.eulerAngles.y;
