@@ -289,12 +289,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7836bb84cd77bc6b19fc5ffd9a2442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vert_horiz: 0
   currentState: 0
   luzVermelha: {fileID: 7564693972459359987}
   luzAmarela: {fileID: 6763056927972576643}
   luzVerde: {fileID: 4734923601216349256}
-  debug: 1
+  debug: 0
 --- !u!65 &430459004417455709
 BoxCollider:
   m_ObjectHideFlags: 0

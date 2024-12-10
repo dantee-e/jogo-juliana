@@ -4,7 +4,7 @@ using UnityEngine;
 public class Semaforo : MonoBehaviour
 {
     float intervalo = 7f;
-    public bool vert_horiz;
+    //public bool vert_horiz;
     public int currentState;
     
 
