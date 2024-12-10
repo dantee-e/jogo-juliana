@@ -6,12 +6,22 @@ public class Semaforo : MonoBehaviour
     float intervalo = 7f;
     public bool vert_horiz;
     public int currentState;
-    public enum State
-    {
-        Red,
-        Green,
-        Yellow
+    
+
+    [SerializeField] Light luzVermelha;
+    [SerializeField] Light luzAmarela;
+    [SerializeField] Light luzVerde;
+
+    public enum luzAtiva {
+        Vermelha,
+        Amarela,
+        Verde
     };
+
+    luzAtiva estado;
+
+    public bool debug;
+
 
     // Referência ao objeto filho que representa a luz do semáforo
     private GameObject planoFilho;
@@ -31,32 +41,85 @@ public class Semaforo : MonoBehaviour
         planoFilho = transform.Find("Plane").gameObject;
         planoFilho.GetComponent<Renderer>().enabled = false;
 
-        if (vert_horiz)
-            ChangeTag("red_light");
-        else
-            ChangeTag("green_light");
+        Transform parentTransform = transform.parent;
 
-        StartCoroutine(ChangeStateLight());
+        if (parentTransform.tag == "column"){
+            estado = luzAtiva.Vermelha;
+            ChangeTag("red_light");
+        }
+        else if (parentTransform.tag == "row"){
+            estado = luzAtiva.Verde;
+            ChangeTag("green_light");
+        }
+/*
+        if (vert_horiz){
+            estado = luzAtiva.Vermelha;
+            ChangeTag("red_light");
+        }
+            
+        else{
+            estado = luzAtiva.Verde;
+            ChangeTag("green_light");
+        }
+          */  
+
+        StartCoroutine(ChangeStateLight()); 
     }
+
+    void acenderLuzes(){
+        switch (estado)
+        {
+            case luzAtiva.Verde:
+                if (debug)
+                    print("Luz ta verde");
+                luzVerde.enabled = true;
+                luzAmarela.enabled = false;
+                luzVermelha.enabled = false;
+                break;
+
+            case luzAtiva.Amarela:
+                if (debug)
+                    print("Luz ta amarela");
+                luzVerde.enabled = false;
+                luzAmarela.enabled = true;
+                luzVermelha.enabled = false;
+                break;
+
+            case luzAtiva.Vermelha:
+                if (debug)
+                    print("Luz ta vermelha");
+                luzVerde.enabled = false;
+                luzAmarela.enabled = false;
+                luzVermelha.enabled = true;
+                break;
+        }
+    }
+
+
 
     IEnumerator ChangeStateLight()
     {
         while (true)
         {
-            if (planoFilho.tag == "green_light")
-            {
-                yield return new WaitForSeconds(2 * intervalo);
-                ChangeTag("yellow_light");
-            }
-            else if (planoFilho.tag == "yellow_light")
-            {
-                yield return new WaitForSeconds(intervalo);
-                ChangeTag("red_light");
-            }
-            else if (planoFilho.tag == "red_light")
-            {
-                yield return new WaitForSeconds(3 * intervalo);
-                ChangeTag("green_light");
+            acenderLuzes();
+            switch (estado){
+                case luzAtiva.Verde:
+                    yield return new WaitForSeconds(2 * intervalo);
+                    ChangeTag("yellow_light");
+                    estado = luzAtiva.Amarela;
+                    break;
+
+                case luzAtiva.Amarela:
+                    yield return new WaitForSeconds(intervalo);
+                    ChangeTag("red_light");
+                    estado = luzAtiva.Vermelha;
+                    break;
+                
+                case luzAtiva.Vermelha:
+                    yield return new WaitForSeconds(3 * intervalo);
+                    ChangeTag("green_light");
+                    estado = luzAtiva.Verde;
+                    break;
             }
         }
     }

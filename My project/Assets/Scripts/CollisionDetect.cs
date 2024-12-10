@@ -8,7 +8,7 @@ public class CollisionDetect : MonoBehaviour
     private bool canDetectCollision = true; // pro cooldown
 
     private int deducoes = 0;
-    public int tempoInicio = 120;
+    public int tempo = 120;
     public int acrescimoTempoObjetivo = 90;
 
     public int max_deducoes = 3;
@@ -54,7 +54,7 @@ public class CollisionDetect : MonoBehaviour
 
     void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "Objetivo")
-            tempoInicio = acrescimoTempoObjetivo;
+            tempo = acrescimoTempoObjetivo;
         else if (other.gameObject.tag == "red_light"){
             float carRotationY = transform.eulerAngles.y;
             float planeRotationY = other.transform.eulerAngles.y;
@@ -74,12 +74,13 @@ public class CollisionDetect : MonoBehaviour
         while (isRunning)
         {
             //Se acabou o tempo
-            if (tempoInicio==0){
+            if (tempo==0){
+                print("acabou tempo");
                 noTime?.Invoke();
             }
 
-            tempoInicio -= 1;
-            textTempo.GetComponent<TMPro.TextMeshProUGUI>().text = "Tempo Restante: " + tempoInicio.ToString();
+            tempo -= 1;
+            textTempo.GetComponent<TMPro.TextMeshProUGUI>().text = "Tempo Restante: " + tempo.ToString();
             yield return new WaitForSeconds(1f);
         }
     }

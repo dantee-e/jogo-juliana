@@ -43,9 +43,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0, g: 1, b: 0.04085064, a: 1}
-  m_Intensity: 1
-  m_Range: 10
+  m_Color: {r: 0.0768957, g: 0.6037736, b: 0.097557634, a: 1}
+  m_Intensity: 8
+  m_Range: 0.82
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -138,8 +138,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 1
-  m_Range: 10
+  m_Intensity: 8
+  m_Range: 0.82
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -221,8 +221,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7519757112588620104}
   - {fileID: 8114254279009018883}
+  - {fileID: 7519757112588620104}
   - {fileID: 246479647365406822}
   - {fileID: 6410241191242793044}
   m_Father: {fileID: 0}
@@ -291,6 +291,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vert_horiz: 0
   currentState: 0
+  luzVermelha: {fileID: 7564693972459359987}
+  luzAmarela: {fileID: 6763056927972576643}
+  luzVerde: {fileID: 4734923601216349256}
+  debug: 1
 --- !u!65 &430459004417455709
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -462,8 +466,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.9468057, g: 1, b: 0, a: 1}
-  m_Intensity: 1
-  m_Range: 10
+  m_Intensity: 8
+  m_Range: 0.82
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
