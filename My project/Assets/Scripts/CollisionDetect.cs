@@ -1,25 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CollisionDetect : MonoBehaviour
 {
     private bool canDetectCollision = true; // pro cooldown
 
     private int deducoes = 0;
-    public int tempoRestante = 120;
+    public int tempoInicio = 120;
+    public int acrescimoTempoObjetivo = 90;
 
-    public int max_deducoes = 10;
+    public int max_deducoes = 3;
 
     GameObject hud;
     GameObject textTempo, textPontos;
+
+    public UnityEvent noPoints;
+    public UnityEvent noTime;
 
     // retorna true se o player ainda tem pontos
     bool changePoints(int deducoes){
         if (textPontos!=null){
             textPontos.GetComponent<TMPro.TextMeshProUGUI>().text = "Pontos: " + ((max_deducoes-deducoes)*10).ToString();
         }
-        if (deducoes != 0)
+        if (deducoes != max_deducoes)
             return true;
         return false;
     }
@@ -32,24 +37,24 @@ public class CollisionDetect : MonoBehaviour
         StartCoroutine(updateTime());
     }
 
-    void OnCollisionEnter(Collision c)
-    {
+    void OnCollisionEnter(Collision c){
         if (canDetectCollision && (c.gameObject.tag == "Ambiente" || c.gameObject.tag == "carro"))
         {
             deducoes++;
-            print("Colidiu com o ambiente: " + c.gameObject.tag + " Colisões: " + deducoes);
 
-            changePoints(deducoes);
+            // se zerou os pontos
+            if (!changePoints(deducoes)){
+                noPoints?.Invoke();
+            }
             
             // cooldown antes da prox colisao
             StartCoroutine(Cooldown());
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
+    void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "Objetivo")
-            tempoRestante = 90;
+            tempoInicio = acrescimoTempoObjetivo;
         else if (other.gameObject.tag == "red_light"){
             float carRotationY = transform.eulerAngles.y;
             float planeRotationY = other.transform.eulerAngles.y;
@@ -57,7 +62,6 @@ public class CollisionDetect : MonoBehaviour
             float angleDifference = Mathf.Abs(Mathf.DeltaAngle(carRotationY, planeRotationY));
 
             if (Mathf.Abs(angleDifference - 180f) < 90f){
-                print("passou no vermelho safado");
                 deducoes++;
                 changePoints(deducoes);
             }
@@ -65,19 +69,22 @@ public class CollisionDetect : MonoBehaviour
     }
 
     private bool isRunning;
-    private IEnumerator updateTime()
-    {
+    private IEnumerator updateTime(){
         isRunning = true;
         while (isRunning)
         {
-            tempoRestante -= 1;
-            textTempo.GetComponent<TMPro.TextMeshProUGUI>().text = "Tempo Restante: " + tempoRestante.ToString();
+            //Se acabou o tempo
+            if (tempoInicio==0){
+                noTime?.Invoke();
+            }
+
+            tempoInicio -= 1;
+            textTempo.GetComponent<TMPro.TextMeshProUGUI>().text = "Tempo Restante: " + tempoInicio.ToString();
             yield return new WaitForSeconds(1f);
         }
     }
 
-    private IEnumerator Cooldown()
-    {
+    private IEnumerator Cooldown(){
         canDetectCollision = false;
         yield return new WaitForSeconds(1f);
         canDetectCollision = true;
