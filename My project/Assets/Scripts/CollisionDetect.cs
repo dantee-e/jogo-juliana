@@ -25,10 +25,10 @@ public class CollisionDetect : MonoBehaviour
     void Start()
     {
         hud = gameObject.transform.Find("HUD").gameObject;
-        textTempo = hud.transform.Find("Tempo").gameObject;
         textPontos = hud.transform.Find("Pontuacao").gameObject;
 
-        StartCoroutine(updateTime());
+        playerMovementScript = gameObject.GetComponent<PlayerMovement>();
+
 
         // Configurando o AudioSource de índice 3
         AudioSource[] audioSources = GetComponents<AudioSource>();
@@ -54,12 +54,7 @@ public class CollisionDetect : MonoBehaviour
         return false;
     }
 
-    void Start(){
-        hud = gameObject.transform.Find("HUD").gameObject;
-        textPontos = hud.transform.Find("Pontuacao").gameObject;
-
-        playerMovementScript = gameObject.GetComponent<PlayerMovement>();
-    }
+    
 
     void OnCollisionEnter(Collision c){
         if (canDetectCollision && (c.gameObject.tag == "Ambiente" || c.gameObject.tag == "carro"))
@@ -103,24 +98,7 @@ public class CollisionDetect : MonoBehaviour
         }
     }
 
-    private bool isRunning;
-    private IEnumerator updateTime()
-    {
-        isRunning = true;
-        while (isRunning)
-        {
-            // Se acabou o tempo
-            if (tempo == 0)
-            {
-                print("acabou tempo");
-                noTime?.Invoke();
-            }
-
-            tempo -= 1;
-            textTempo.GetComponent<TMPro.TextMeshProUGUI>().text = "Tempo Restante: " + tempo.ToString();
-            yield return new WaitForSeconds(1f);
-        }
-    }
+    
 
     private IEnumerator Cooldown()
     {
