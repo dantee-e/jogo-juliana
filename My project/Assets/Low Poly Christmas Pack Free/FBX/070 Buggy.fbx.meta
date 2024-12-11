@@ -1,0 +1,192 @@
+fileFormatVersion: 2
+guid: da60f1e1bae284f5a95df1ab7cbbcdac
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Lowpoly_Christmas_Pack_070:pCube1
+    100004: Lowpoly_Christmas_Pack_070:pCube10
+    100006: Lowpoly_Christmas_Pack_070:pCube11
+    100008: Lowpoly_Christmas_Pack_070:pCube12
+    100010: Lowpoly_Christmas_Pack_070:pCube13
+    100012: Lowpoly_Christmas_Pack_070:pCube14
+    100014: Lowpoly_Christmas_Pack_070:pCube15
+    100016: Lowpoly_Christmas_Pack_070:pCube16
+    100018: Lowpoly_Christmas_Pack_070:pCube17
+    100020: Lowpoly_Christmas_Pack_070:pCube18
+    100022: Lowpoly_Christmas_Pack_070:pCube19
+    100024: Lowpoly_Christmas_Pack_070:pCube2
+    100026: Lowpoly_Christmas_Pack_070:pCube20
+    100028: Lowpoly_Christmas_Pack_070:pCube21
+    100030: Lowpoly_Christmas_Pack_070:pCube22
+    100032: Lowpoly_Christmas_Pack_070:pCube23
+    100034: Lowpoly_Christmas_Pack_070:pCube24
+    100036: Lowpoly_Christmas_Pack_070:pCube3
+    100038: Lowpoly_Christmas_Pack_070:pCube4
+    100040: Lowpoly_Christmas_Pack_070:pCube5
+    100042: Lowpoly_Christmas_Pack_070:pCube6
+    100044: Lowpoly_Christmas_Pack_070:pCube7
+    100046: Lowpoly_Christmas_Pack_070:pCube8
+    100048: Lowpoly_Christmas_Pack_070:pCube9
+    100050: Lowpoly_Christmas_Pack_070:transform1
+    100052: Lowpoly_Christmas_Pack_070:transform10
+    100054: Lowpoly_Christmas_Pack_070:transform11
+    100056: Lowpoly_Christmas_Pack_070:transform12
+    100058: Lowpoly_Christmas_Pack_070:transform13
+    100060: Lowpoly_Christmas_Pack_070:transform14
+    100062: Lowpoly_Christmas_Pack_070:transform15
+    100064: Lowpoly_Christmas_Pack_070:transform16
+    100066: Lowpoly_Christmas_Pack_070:transform17
+    100068: Lowpoly_Christmas_Pack_070:transform18
+    100070: Lowpoly_Christmas_Pack_070:transform19
+    100072: Lowpoly_Christmas_Pack_070:transform2
+    100074: Lowpoly_Christmas_Pack_070:transform20
+    100076: Lowpoly_Christmas_Pack_070:transform21
+    100078: Lowpoly_Christmas_Pack_070:transform22
+    100080: Lowpoly_Christmas_Pack_070:transform23
+    100082: Lowpoly_Christmas_Pack_070:transform3
+    100084: Lowpoly_Christmas_Pack_070:transform4
+    100086: Lowpoly_Christmas_Pack_070:transform5
+    100088: Lowpoly_Christmas_Pack_070:transform6
+    100090: Lowpoly_Christmas_Pack_070:transform7
+    100092: Lowpoly_Christmas_Pack_070:transform8
+    100094: Lowpoly_Christmas_Pack_070:transform9
+    400000: //RootNode
+    400002: Lowpoly_Christmas_Pack_070:pCube1
+    400004: Lowpoly_Christmas_Pack_070:pCube10
+    400006: Lowpoly_Christmas_Pack_070:pCube11
+    400008: Lowpoly_Christmas_Pack_070:pCube12
+    400010: Lowpoly_Christmas_Pack_070:pCube13
+    400012: Lowpoly_Christmas_Pack_070:pCube14
+    400014: Lowpoly_Christmas_Pack_070:pCube15
+    400016: Lowpoly_Christmas_Pack_070:pCube16
+    400018: Lowpoly_Christmas_Pack_070:pCube17
+    400020: Lowpoly_Christmas_Pack_070:pCube18
+    400022: Lowpoly_Christmas_Pack_070:pCube19
+    400024: Lowpoly_Christmas_Pack_070:pCube2
+    400026: Lowpoly_Christmas_Pack_070:pCube20
+    400028: Lowpoly_Christmas_Pack_070:pCube21
+    400030: Lowpoly_Christmas_Pack_070:pCube22
+    400032: Lowpoly_Christmas_Pack_070:pCube23
+    400034: Lowpoly_Christmas_Pack_070:pCube24
+    400036: Lowpoly_Christmas_Pack_070:pCube3
+    400038: Lowpoly_Christmas_Pack_070:pCube4
+    400040: Lowpoly_Christmas_Pack_070:pCube5
+    400042: Lowpoly_Christmas_Pack_070:pCube6
+    400044: Lowpoly_Christmas_Pack_070:pCube7
+    400046: Lowpoly_Christmas_Pack_070:pCube8
+    400048: Lowpoly_Christmas_Pack_070:pCube9
+    400050: Lowpoly_Christmas_Pack_070:transform1
+    400052: Lowpoly_Christmas_Pack_070:transform10
+    400054: Lowpoly_Christmas_Pack_070:transform11
+    400056: Lowpoly_Christmas_Pack_070:transform12
+    400058: Lowpoly_Christmas_Pack_070:transform13
+    400060: Lowpoly_Christmas_Pack_070:transform14
+    400062: Lowpoly_Christmas_Pack_070:transform15
+    400064: Lowpoly_Christmas_Pack_070:transform16
+    400066: Lowpoly_Christmas_Pack_070:transform17
+    400068: Lowpoly_Christmas_Pack_070:transform18
+    400070: Lowpoly_Christmas_Pack_070:transform19
+    400072: Lowpoly_Christmas_Pack_070:transform2
+    400074: Lowpoly_Christmas_Pack_070:transform20
+    400076: Lowpoly_Christmas_Pack_070:transform21
+    400078: Lowpoly_Christmas_Pack_070:transform22
+    400080: Lowpoly_Christmas_Pack_070:transform23
+    400082: Lowpoly_Christmas_Pack_070:transform3
+    400084: Lowpoly_Christmas_Pack_070:transform4
+    400086: Lowpoly_Christmas_Pack_070:transform5
+    400088: Lowpoly_Christmas_Pack_070:transform6
+    400090: Lowpoly_Christmas_Pack_070:transform7
+    400092: Lowpoly_Christmas_Pack_070:transform8
+    400094: Lowpoly_Christmas_Pack_070:transform9
+    2100000: Lowpoly_Christmas_Pack_070_phong1
+    2300000: Lowpoly_Christmas_Pack_070:pCube24
+    3300000: Lowpoly_Christmas_Pack_070:pCube24
+    4300000: Lowpoly_Christmas_Pack_070:pCube24
+    6400000: Lowpoly_Christmas_Pack_070:pCube24
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
