@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour{
 
     // iniciar jogo
     public void Jogar(){
+        Time.timeScale = 1;
         sinalJogar?.Invoke();
     }
 
