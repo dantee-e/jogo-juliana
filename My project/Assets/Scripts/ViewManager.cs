@@ -13,7 +13,7 @@ public class ViewManager : MonoBehaviour
     private Scene gameScene;
     private GameObject player;
 
-    public int dificuldade = 0;
+    int dificuldade = 1;
 
     [SerializeField] GameObject mainMenuPrefab;
 
@@ -34,22 +34,32 @@ public class ViewManager : MonoBehaviour
         // aguarda a cena carregar
         while (!asyncLoad.isDone)
             yield return null;
+
+            
+        yield return new WaitForSeconds(0.1f);
         
         gameScene = SceneManager.GetSceneByName(nameScene);
         player = findObjectInSceneByName(gameScene, "Player");
-        if (player == null){    
+        if (player == null)
             Debug.Log("No player!!!");
-        }
-        else
-            Debug.Log("Player!!!");
+        
         CollisionDetect playerScriptCollisions = player.GetComponent<CollisionDetect>();
         PlayerMovement playerScriptMovement = player.GetComponent<PlayerMovement>();
         CarPositionReset playerScriptRotation = player.GetComponent<CarPositionReset>();
+
+        if (playerScriptCollisions == null || playerScriptMovement == null || playerScriptRotation == null)
+        {
+            Debug.LogError("One or more required components are missing on the Player object!");
+            yield break;
+        }
 
         playerScriptCollisions.noPoints.AddListener(() => crash());
         playerScriptMovement.noTime.AddListener(() => noTime());
         playerScriptMovement.ganhou.AddListener(() => ganhou());
         playerScriptRotation.capotouOCorsa.AddListener(() => crash());
+
+        playerScriptMovement.setDificuldade(dificuldade);
+        playerScriptCollisions.setDificuldade(dificuldade);
 
         
     }
@@ -110,7 +120,7 @@ public class ViewManager : MonoBehaviour
 
     private void setDificuldade(int i){
         dificuldade = i;
-        print("Dificuldade mudada");
+        print("set dificuldade ViewManager = " + i.ToString());
     }
 
     void instantiateMenu(){
@@ -125,6 +135,9 @@ public class ViewManager : MonoBehaviour
         if (mainMenuScript != null) {
             mainMenuScript.sinalJogar.AddListener(() => startGame());
             mainMenuScript.sinalSair.AddListener(() => quit());
+            mainMenuScript.SetDificuldadeFacil.AddListener(() => setDificuldade(0));
+            mainMenuScript.SetDificuldadeNormal.AddListener(() => setDificuldade(1));
+            mainMenuScript.SetDificuldadeDificil.AddListener(() => setDificuldade(2));
         } else {
             Debug.LogWarning("MainMenu script not found on the object.");
         }

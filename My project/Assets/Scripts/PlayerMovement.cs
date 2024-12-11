@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float carMaxSpeed = 100f;
     public float carCurrentSpeed = 0f;
 
+
     private Rigidbody rb;
 
     Transform hud;
@@ -33,8 +34,8 @@ public class PlayerMovement : MonoBehaviour
     public UnityEvent ganhou;
     public UnityEvent noTime;
 
-    public int tempo = 200;
-    public int acrescimoTempoObjetivo = 200;
+    int tempo = 400;
+    int acrescimoTempoObjetivo = 400;
 
     int objetivoNum = 0;
     int totalNiveis = 3;
@@ -45,7 +46,14 @@ public class PlayerMovement : MonoBehaviour
     "O açougueiro do Tauste entrega o peru com um sorriso caloroso, contagiado pelo espírito natalino (ele vai sair mais cedo do trampo) 'Aqui está! O peru está impecável, pronto para sua ceia. Você coloca o peru no banco do passageiro, e passa o cinto nele, esquecendo-se de passar por si mesmo. A adrenalina aumenta, o relógio está correndo, e sua família espera por você. Agora é hora de ir para casa e salvar o Natal (que você mesmo quase estragou)!" 
     };
 
-
+    int dificuldade;
+    public void setDificuldade(int i){
+        dificuldade = i;
+        tempo = tempo - i*100;
+        acrescimoTempoObjetivo = acrescimoTempoObjetivo - i*100;
+        alcool_no_sangue = 0.2f*i;
+        print("set dificuldade Player Movement = " + i.ToString());
+    }
 
     public void hideTutorial(){
         // define o texto como nada
@@ -129,7 +137,6 @@ public class PlayerMovement : MonoBehaviour
         hud = gameObject.transform.Find("HUD");
         textTempo = hud.gameObject.transform.Find("Tempo").gameObject;
         
-
         StartCoroutine(updateTime());
 
         foreach (Transform child in transform) {
@@ -182,15 +189,6 @@ public class PlayerMovement : MonoBehaviour
             currentAcceleration = acceleration * verticalInput;
         }
         else if (verticalInput < 0){
-            /*if (rb.velocity.magnitude < 0.2){
-                print("dando re");
-                currentBreakForce = 0;
-                currentAcceleration = acceleration * verticalInput;
-            }
-            else{
-                currentAcceleration = 0;
-                currentBreakForce = -breakingForce * verticalInput;
-            }*/
             currentBreakForce = 0;
             currentAcceleration = acceleration * 2 * verticalInput;
             

@@ -10,13 +10,21 @@ public class CollisionDetect : MonoBehaviour
     private int deducoes = 0;
     
 
-    int max_deducoes = 20;
+    int max_deducoes = 30;
 
     GameObject hud;
     GameObject textPontos;
 
     public UnityEvent noPoints;
-    
+
+    int dificuldade;
+    // deixa mais dificil baseado na dificuldade
+    public void setDificuldade(int i){
+        dificuldade = i;
+        max_deducoes = max_deducoes-10*i;
+        print("set dificuldade Collision Detect = " + i.ToString());
+        changePoints()
+    }
 
     PlayerMovement playerMovementScript;
 
@@ -25,6 +33,7 @@ public class CollisionDetect : MonoBehaviour
     void Start(){
         hud = gameObject.transform.Find("HUD").gameObject;
         textPontos = hud.transform.Find("Pontuacao").gameObject;
+
 
         playerMovementScript = gameObject.GetComponent<PlayerMovement>();
 
