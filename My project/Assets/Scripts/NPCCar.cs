@@ -50,8 +50,7 @@ public class NPCCar : MonoBehaviour
 
     void teleportToSpawn(RaycastHit hit){
         GameObject plano = hit.collider.gameObject;
-        if (plano.transform.parent != null)
-        {
+        if (plano.transform.parent != null){
             Transform parent = plano.transform.parent;
             Transform spawnPoint = null;//parent.Find("SpawnPoint");
             Transform spawnPoint2 = null;//parent.Find("SpawnPoint2");
@@ -71,7 +70,6 @@ public class NPCCar : MonoBehaviour
 
             if (spawnPoint2 != null){
                 int i = Random.Range(0,2);
-                print(i);
                 if (i==1){
                     rb.position = new Vector3(spawnPoint2.position.x, rb.position.y, spawnPoint2.position.z);
                     return;

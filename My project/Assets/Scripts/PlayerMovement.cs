@@ -33,8 +33,8 @@ public class PlayerMovement : MonoBehaviour
     public UnityEvent ganhou;
     public UnityEvent noTime;
 
-    public int tempo = 120;
-    public int acrescimoTempoObjetivo = 90;
+    public int tempo = 200;
+    public int acrescimoTempoObjetivo = 200;
 
     int objetivoNum = 0;
     int totalNiveis = 3;
@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void chegouObjetivo(){
         newTutorial(historia[objetivoNum]);
-        tempo = 90;
+        tempo = acrescimoTempoObjetivo;
         objetivoNum++;
         if (objetivoNum == totalNiveis){
             ganhou?.Invoke();
@@ -177,18 +177,25 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        if (verticalInput > 0)
-        {
+        if (verticalInput > 0){
             currentBreakForce = 0;
             currentAcceleration = acceleration * verticalInput;
         }
-        else if (verticalInput < 0)
-        {
-            currentAcceleration = 0;
-            currentBreakForce = -breakingForce * verticalInput;
+        else if (verticalInput < 0){
+            /*if (rb.velocity.magnitude < 0.2){
+                print("dando re");
+                currentBreakForce = 0;
+                currentAcceleration = acceleration * verticalInput;
+            }
+            else{
+                currentAcceleration = 0;
+                currentBreakForce = -breakingForce * verticalInput;
+            }*/
+            currentBreakForce = 0;
+            currentAcceleration = acceleration * 2 * verticalInput;
+            
         }
-        else
-        {
+        else{
             currentAcceleration = currentBreakForce = 0;
         }
         currentTurnAngle = maxTurnAngle * horizontalInput;

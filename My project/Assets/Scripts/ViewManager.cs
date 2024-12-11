@@ -73,8 +73,8 @@ public class ViewManager : MonoBehaviour
 
         Scene animacao = SceneManager.GetSceneByName(sceneName);
         GameObject winAnimationObject = findObjectInSceneByName(animacao, sceneName);
-        ReturnToMenu winAnimationScript = winAnimationObject.GetComponentInChildren<ReturnToMenu>();
-        winAnimationScript.sinalSair.AddListener(() => {
+        ReturnToMenu AnimationScript = AnimationObject.GetComponentInChildren<ReturnToMenu>();
+        AnimationScript.sinalSair.AddListener(() => {
             unloadScene(sceneName);
             instantiateMenu();
         });

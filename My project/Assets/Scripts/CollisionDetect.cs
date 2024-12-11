@@ -10,7 +10,7 @@ public class CollisionDetect : MonoBehaviour
     private int deducoes = 0;
     
 
-    public int max_deducoes = 10;
+    int max_deducoes = 20;
 
     GameObject hud;
     GameObject textPontos;
@@ -31,18 +31,16 @@ public class CollisionDetect : MonoBehaviour
 
         // Configurando o AudioSource de índice 3
         AudioSource[] audioSources = GetComponents<AudioSource>();
-        if (audioSources.Length > 2)
-        {
+        if (audioSources.Length > 2){
             collisionSound = audioSources[2];
         }
-        else
-        {
+        else{
             Debug.LogWarning("Não há AudioSource de índice 2 no GameObject!");
         }
     }
 
     // retorna true se o player ainda tem pontos
-    bool changePoints(int deducoes){
+    bool changePoints(){
         if (textPontos != null){
             textPontos.GetComponent<TMPro.TextMeshProUGUI>().text = "Pontos: " + ((max_deducoes - deducoes) * 10).ToString();
         }
@@ -62,7 +60,7 @@ public class CollisionDetect : MonoBehaviour
                 collisionSound.Play();
             }
             // se zerou os pontos
-            if (!changePoints(deducoes)){
+            if (!changePoints()){
                 noPoints?.Invoke();
             }
 
@@ -73,6 +71,7 @@ public class CollisionDetect : MonoBehaviour
 
     void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "Objetivo"){
+            deducoes = 0;
             playerMovementScript.chegouObjetivo();
         }
 
@@ -85,7 +84,7 @@ public class CollisionDetect : MonoBehaviour
 
             if (Mathf.Abs(angleDifference - 180f) < 90f){
                 deducoes++;
-                if (!changePoints(deducoes)){
+                if (!changePoints()){
                     noPoints?.Invoke();
                 }
             }
