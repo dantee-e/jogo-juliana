@@ -23,7 +23,7 @@ public class CollisionDetect : MonoBehaviour
         dificuldade = i;
         max_deducoes = max_deducoes-10*i;
         print("set dificuldade Collision Detect = " + i.ToString());
-        changePoints()
+        changePoints();
     }
 
     PlayerMovement playerMovementScript;
