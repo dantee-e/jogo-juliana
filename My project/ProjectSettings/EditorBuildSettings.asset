@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Crash Animation.unity
     guid: fdbc83c5ba8ee1544bb2be2f0957f5d9
+  - enabled: 1
+    path: Assets/Scenes/YouWin.unity
+    guid: 6b90e02026200c94188df20ed698566f
   m_configObjects: {}
