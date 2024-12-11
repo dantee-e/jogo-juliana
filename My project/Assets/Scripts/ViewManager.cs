@@ -102,6 +102,7 @@ public class ViewManager : MonoBehaviour
     }
     private void ganhou(){
         is_in_game = false;
+        print("carregando W scene");
         StartCoroutine(loadEndScene(nameWScene));
     }
 

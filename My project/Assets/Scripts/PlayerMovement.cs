@@ -106,7 +106,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void chegouObjetivo(){
-        newTutorial(historia[objetivoNum]);
+        if (objetivoNum<totalNiveis-1)
+            newTutorial(historia[objetivoNum]);
         tempo = acrescimoTempoObjetivo;
         objetivoNum++;
         if (objetivoNum == totalNiveis){
