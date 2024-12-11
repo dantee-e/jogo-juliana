@@ -9,10 +9,11 @@ public class ViewManager : MonoBehaviour
     public string nameGameScene = "cidades_juncao", nameLCrashScene = "Crash Animation", nameLTimeScene = "Time Animation", nameWScene = "YouWin";
     private GameObject mainMenuObject;
     private bool is_in_game = false;
-    // todo implementar menu de pausa usando essa variave ^
 
     private Scene gameScene;
     private GameObject player;
+
+    public int dificuldade = 0;
 
     [SerializeField] GameObject mainMenuPrefab;
 
@@ -72,7 +73,7 @@ public class ViewManager : MonoBehaviour
             yield return null;
 
         Scene animacao = SceneManager.GetSceneByName(sceneName);
-        GameObject winAnimationObject = findObjectInSceneByName(animacao, sceneName);
+        GameObject AnimationObject = findObjectInSceneByName(animacao, sceneName);
         ReturnToMenu AnimationScript = AnimationObject.GetComponentInChildren<ReturnToMenu>();
         AnimationScript.sinalSair.AddListener(() => {
             unloadScene(sceneName);
@@ -107,6 +108,11 @@ public class ViewManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    private void setDificuldade(int i){
+        dificuldade = i;
+        print("Dificuldade mudada");
+    }
+
     void instantiateMenu(){
         if (mainMenuObject != null) {
             return;
@@ -132,7 +138,4 @@ public class ViewManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             instantiateMenu();
     }
-
-
-    
 }
