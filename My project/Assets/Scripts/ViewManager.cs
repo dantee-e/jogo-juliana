@@ -43,9 +43,11 @@ public class ViewManager : MonoBehaviour
             Debug.Log("Player!!!");
         CollisionDetect playerScriptCollisions = player.GetComponent<CollisionDetect>();
         PlayerMovement playerScriptMovement = player.GetComponent<PlayerMovement>();
+        CarPositionReset playerScriptRotation = player.GetComponent<CarPositionReset>();
 
-        playerScriptCollisions.noPoints.AddListener(() => noPoints());
+        playerScriptCollisions.noPoints.AddListener(() => crash());
         playerScriptMovement.noTime.AddListener(() => noTime());
+        playerScriptRotation.capotouOCorsa.AddListener(() => crash());
 
         
     }
@@ -94,22 +96,17 @@ public class ViewManager : MonoBehaviour
         });
     }
 
-    private void noPoints(){
-        print("Crashed");
+    private void crash(){
         is_in_game = false;
         StartCoroutine(loadLCrashScene());
     }
     private void noTime(){
-        print("No Time");
         is_in_game = false;
         StartCoroutine(loadLTimeScene());
     }
 
     private void startGame(){
-        print("Iniciando jogo");
-
         if (mainMenuObject != null){
-            print("destroying menu");
             Destroy(mainMenuObject);
         }
         if(is_in_game)
@@ -131,7 +128,6 @@ public class ViewManager : MonoBehaviour
 
         MainMenu mainMenuScript = mainMenuObject.GetComponentInChildren<MainMenu>();
         if (mainMenuScript != null) {
-            print("adicionando listeners");
             mainMenuScript.sinalJogar.AddListener(() => startGame());
             mainMenuScript.sinalSair.AddListener(() => quit());
         } else {

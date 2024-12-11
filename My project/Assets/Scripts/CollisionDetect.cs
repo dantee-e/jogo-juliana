@@ -10,7 +10,7 @@ public class CollisionDetect : MonoBehaviour
     private int deducoes = 0;
     
 
-    public int max_deducoes = 3;
+    public int max_deducoes = 10;
 
     GameObject hud;
     GameObject textPontos;
@@ -22,8 +22,7 @@ public class CollisionDetect : MonoBehaviour
 
     private AudioSource collisionSound;
 
-    void Start()
-    {
+    void Start(){
         hud = gameObject.transform.Find("HUD").gameObject;
         textPontos = hud.transform.Find("Pontuacao").gameObject;
 
@@ -43,10 +42,8 @@ public class CollisionDetect : MonoBehaviour
     }
 
     // retorna true se o player ainda tem pontos
-    bool changePoints(int deducoes)
-    {
-        if (textPontos != null)
-        {
+    bool changePoints(int deducoes){
+        if (textPontos != null){
             textPontos.GetComponent<TMPro.TextMeshProUGUI>().text = "Pontos: " + ((max_deducoes - deducoes) * 10).ToString();
         }
         if (deducoes != max_deducoes)
@@ -57,18 +54,15 @@ public class CollisionDetect : MonoBehaviour
     
 
     void OnCollisionEnter(Collision c){
-        if (canDetectCollision && (c.gameObject.tag == "Ambiente" || c.gameObject.tag == "carro"))
-        {
+        if (canDetectCollision && (c.gameObject.tag == "Ambiente" || c.gameObject.tag == "carro")){
             deducoes++;
 
             // Toca o som de colisão
-            if (collisionSound != null)
-            {
+            if (collisionSound != null){
                 collisionSound.Play();
             }
             // se zerou os pontos
-            if (!changePoints(deducoes))
-            {
+            if (!changePoints(deducoes)){
                 noPoints?.Invoke();
             }
 
@@ -77,8 +71,7 @@ public class CollisionDetect : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
+    void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "Objetivo"){
             playerMovementScript.chegouObjetivo();
         }
@@ -90,10 +83,11 @@ public class CollisionDetect : MonoBehaviour
 
             float angleDifference = Mathf.Abs(Mathf.DeltaAngle(carRotationY, planeRotationY));
 
-            if (Mathf.Abs(angleDifference - 180f) < 90f)
-            {
+            if (Mathf.Abs(angleDifference - 180f) < 90f){
                 deducoes++;
-                changePoints(deducoes);
+                if (!changePoints(deducoes)){
+                    noPoints?.Invoke();
+                }
             }
         }
     }

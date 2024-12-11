@@ -72,15 +72,17 @@ No caminho, obstáculos e trânsito desafiarão suas habilidades. Cuidado! Cada 
 
                 // oculta o texto do butao
                 var textComponent = button.GetComponentInChildren<TMPro.TextMeshProUGUI>();
-                if (textComponent != null)
-                    textComponent.gameObject.SetActive(false);
-
+                if (textComponent != null){
+                    textComponent.enabled = false;
+                }
                 
             }
         }
+        Time.timeScale = 1;
     }
 
     void newTutorial(string text){
+        Time.timeScale = 0;
         // define o texto como as novas instrucoes
         if (instrucoes != null){
             var textMeshPro = instrucoes.GetComponent<TMPro.TextMeshProUGUI>();
@@ -92,18 +94,22 @@ No caminho, obstáculos e trânsito desafiarão suas habilidades. Cuidado! Cada 
         if (acceptButton != null){
             var button = acceptButton.GetComponent<UnityEngine.UI.Button>();
             if (button != null){
+                
                 button.interactable = true;
 
                 var textComponent = button.GetComponentInChildren<TMPro.TextMeshProUGUI>();
-                if (textComponent != null)
-                    textComponent.gameObject.SetActive(true);
+                if (textComponent != null){
+                    textComponent.enabled = true;
+                }
+                    
             }
         }
     }
 
     public void chegouObjetivo(){
+        newTutorial(historia[objetivoNum]);
         tempo = 90;
-        newTutorial("checkpoint numero " + tempo.ToString());
+        objetivoNum++;
     }
 
 
@@ -114,7 +120,6 @@ No caminho, obstáculos e trânsito desafiarão suas habilidades. Cuidado! Cada 
         {
             // se acabou o tempo
             if (tempo==0){
-                print("acabou tempo");
                 noTime?.Invoke();
             }
 
@@ -147,7 +152,7 @@ No caminho, obstáculos e trânsito desafiarão suas habilidades. Cuidado! Cada 
             }
         }
 
-        newTutorial(historia[0]);
+        newTutorial(contexto);
 
 
         rb = GetComponent<Rigidbody>();

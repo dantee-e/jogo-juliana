@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CarPositionReset : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class CarPositionReset : MonoBehaviour
     private float flipThreshold = 5f; // Tempo em segundos para restaurar posição
     private float angleThreshold = 60f; // Ângulo máximo de inclinação para considerar tombado
 
+    public UnityEvent capotouOCorsa;
+
     private void Start()
     {
         // Armazena a posição e rotação iniciais do carro
@@ -15,36 +18,31 @@ public class CarPositionReset : MonoBehaviour
         initialRotation = transform.rotation;
     }
 
-    private void Update()
-    {
+    private void Update(){
         // Verifica se o carro está tombado ou de ponta cabeça
-        if (IsFlipped())
-        {
+        if (IsFlipped()){
             // Incrementa o timer de "tombado"
             flipTimer += Time.deltaTime;
 
-            // Se passou do limite, restaura a posição e rotação iniciais
-            if (flipTimer >= flipThreshold)
-            {
-                ResetToInitialPosition();
+            // Se passou do limite, perdeu o jogo
+            if (flipTimer >= flipThreshold){
+                print("capotaste?");
+                capotouOCorsa?.Invoke();
             }
         }
-        else
-        {
+        else{
             // Se o carro está em posição normal, reinicia o timer
             flipTimer = 0f;
         }
     }
 
-    private bool IsFlipped()
-    {
+    private bool IsFlipped(){
         // Verifica o ângulo entre o vetor "up" do carro e o vetor "up" global
         float angle = Vector3.Angle(transform.up, Vector3.up);
         return angle > angleThreshold;
     }
 
-    private void ResetToInitialPosition()
-    {
+    private void ResetToInitialPosition(){
         transform.position = initialPosition;
         transform.rotation = initialRotation;
         flipTimer = 0f; // Reseta o timer após a restauração

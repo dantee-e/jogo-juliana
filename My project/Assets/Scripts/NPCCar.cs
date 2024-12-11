@@ -20,7 +20,7 @@ public class NPCCar : MonoBehaviour
     private Material[] carMaterials;
     private Renderer carRenderer;
 
-    private bool deebug = false;
+    public bool debug = false;
 
 
     private Quaternion starting_rotation;
@@ -53,12 +53,34 @@ public class NPCCar : MonoBehaviour
         if (plano.transform.parent != null)
         {
             Transform parent = plano.transform.parent;
-            Transform spawnPoint = parent.Find("SpawnPoint");
-            if (spawnPoint == null){
-                print("o spawn point nao foi encontrado");
-                return;
+            Transform spawnPoint = null;//parent.Find("SpawnPoint");
+            Transform spawnPoint2 = null;//parent.Find("SpawnPoint2");
+
+            foreach (Transform child in parent) {
+                if (child.name == "SpawnPoint")
+                    spawnPoint = child;
+                
+                else if(child.name == "SpawnPoint2")
+                    spawnPoint2 = child;
             }
-            rb.position = spawnPoint.position;
+
+            if (spawnPoint2 == null){
+                if (debug)
+                    print("o spawn point 2 nao foi encontrado");
+            }
+
+            if (spawnPoint2 != null){
+                int i = Random.Range(0,2);
+                print(i);
+                if (i==1){
+                    rb.position = new Vector3(spawnPoint2.position.x, rb.position.y, spawnPoint2.position.z);
+                    return;
+                }
+                    
+                
+            }
+            rb.position = new Vector3(spawnPoint.position.x, rb.position.y, spawnPoint.position.z);
+            return;
         }
         return;
     }
@@ -80,9 +102,6 @@ public class NPCCar : MonoBehaviour
 
             float oppositeMargin = 10f;
 
-            if (deebug){
-                print("Angle difference: " + angleDifference);
-            }
 
             // If the car and light are facing opposite directions (roughly 180 degrees apart)
             if (Mathf.Abs(angleDifference - 180f) <= oppositeMargin) {
@@ -90,8 +109,8 @@ public class NPCCar : MonoBehaviour
                 switch (hitObject.tag){
                     case "green_light":
                         movement = true; // Car can move if the light is green
-                        if (deebug)
-                            print("Green light: Car continues moving.");
+                        //if (debug)
+                        //    print("Green light: Car continues moving.");
                         break;
 
                     case "yellow_light":
@@ -99,14 +118,14 @@ public class NPCCar : MonoBehaviour
                             movement = true;
                         else
                             movement = false;
-                        if (deebug)
-                            print("Yellow light: Car stops.");
+                        //if (debug)
+                        //    print("Yellow light: Car stops.");
                         break;
 
                     case "red_light":
                         movement = false;
-                        if (deebug)
-                            print("Red light: Car stops.");
+                        //if (debug)
+                        //    print("Red light: Car stops.");
                         break;
 
 
