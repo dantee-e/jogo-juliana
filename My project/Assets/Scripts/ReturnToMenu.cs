@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TimeAnimation : MonoBehaviour
+public class ReturnToMenu : MonoBehaviour
 {
     public UnityEvent sinalSair;
 

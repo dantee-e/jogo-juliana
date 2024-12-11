@@ -30,23 +30,14 @@ public class PlayerMovement : MonoBehaviour
     float currentBreakForce = 0;
     float currentTurnAngle = 0;
 
+    public UnityEvent ganhou;
     public UnityEvent noTime;
+
     public int tempo = 120;
     public int acrescimoTempoObjetivo = 90;
 
     int objetivoNum = 0;
-
-
-/*
-É tarde de sábado, véspera de Natal. Você está saindo do "Bar do Tatu", onde passou a tarde com seu amigo Dante. Apesar de ter se divertido, agora é hora de enfrentar um desafio emocionante: correr contra o tempo para garantir que a ceia de Natal com sua família aconteça!
-
-Mas o trajeto não será fácil. Você tem três tarefas cruciais a cumprir antes de chegar em casa:
-1️⃣ Deixar Dante na casa dele – Afinal, amigos ajudam amigos!
-2️⃣ Buscar o peru da ceia de Natal – Porque sem ele, a festa perde a magia!
-3️⃣ Chegar em casa a tempo e vivo – Para provar que não foi só "comprar cigarro".
-
-No caminho, obstáculos e trânsito desafiarão suas habilidades. Cuidado! Cada colisão tira pontos de sua pontuação total. Se seus pontos chegarem a zero, seu carro entra em combustão e o Natal vira fumaça – literalmente.
-*/
+    int totalNiveis = 3;
 
     string contexto = "É tarde de sábado, véspera de Natal. Você está saindo do Bar do Tatu, onde passou a tarde com a rapazeada. Depois ter se divertido, você se lembra de que não comprou o peru pra ceia de natal! Resta correr contra o tempo para garantir que a ceia de Natal com sua família aconteça.\nO trajeto não será fácil. Você tem três tarefas a cumprir antes de chegar em casa:\n1. Deixar Dante na casa dele\n2.Buscar o peru da ceia de Natal\n3. Chegar em casa a tempo e vivo, e provar que não foi comprar cigarro\n\nNo caminho, obstáculos e trânsito desafiarão suas habilidades. Cuidado! Cada colisão tira pontos de sua pontuação total. Se seus pontos chegarem a zero, seu carro entra em combustão e o Natal vira fumaça – literalmente.";
 
@@ -110,6 +101,9 @@ No caminho, obstáculos e trânsito desafiarão suas habilidades. Cuidado! Cada 
         newTutorial(historia[objetivoNum]);
         tempo = 90;
         objetivoNum++;
+        if (objetivoNum == totalNiveis){
+            ganhou?.Invoke();
+        }
     }
 
 
@@ -158,8 +152,7 @@ No caminho, obstáculos e trânsito desafiarão suas habilidades. Cuidado! Cada 
         rb = GetComponent<Rigidbody>();
     }
 
-    IEnumerator updateMovement(float currentAcceleration, float currentBreakForce, float currentTurnAngle)
-    {
+    IEnumerator updateMovement(float currentAcceleration, float currentBreakForce, float currentTurnAngle) {
         yield return new WaitForSeconds(alcool_no_sangue); // alterar para definir o efeito do álcool
 
         frontRight.motorTorque = currentAcceleration;
@@ -176,13 +169,11 @@ No caminho, obstáculos e trânsito desafiarão suas habilidades. Cuidado! Cada 
         frontRight.steerAngle = currentTurnAngle;
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate(){
         carCurrentSpeed = (rb.velocity.magnitude * 3.6f) / carMaxSpeed; // velocidade atual em relação à velocidade máxima
     }
 
-    void Update()
-    {
+    void Update(){
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 

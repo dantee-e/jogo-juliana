@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class ViewManager : MonoBehaviour
 {
-    public string nameGameScene = "cidades_juncao", nameLCrashScene = "Crash Animation", nameLTimeScene = "Time Animation";
+    public string nameGameScene = "cidades_juncao", nameLCrashScene = "Crash Animation", nameLTimeScene = "Time Animation", nameWScene = "YouWin";
     private GameObject mainMenuObject;
     private bool is_in_game = false;
     // todo implementar menu de pausa usando essa variave ^
@@ -47,6 +47,7 @@ public class ViewManager : MonoBehaviour
 
         playerScriptCollisions.noPoints.AddListener(() => crash());
         playerScriptMovement.noTime.AddListener(() => noTime());
+        playerScriptMovement.ganhou.AddListener(() => ganhou());
         playerScriptRotation.capotouOCorsa.AddListener(() => crash());
 
         
@@ -62,47 +63,35 @@ public class ViewManager : MonoBehaviour
         Application.Quit();
     }
 
-    IEnumerator loadLTimeScene(){
+    IEnumerator loadEndScene(string sceneName){
         unloadScene(nameGameScene);
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(nameLTimeScene, LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         
         // aguarda a cena carregar
         while (!asyncLoad.isDone)
             yield return null;
 
-        Scene animacao = SceneManager.GetSceneByName(nameLTimeScene);
-        GameObject timeAnimationObject = findObjectInSceneByName(animacao, "Time Animation");
-        TimeAnimation timeAnimationScript = timeAnimationObject.GetComponentInChildren<TimeAnimation>();
-        timeAnimationScript.sinalSair.AddListener(() => {
-            unloadScene(nameLTimeScene);
+        Scene animacao = SceneManager.GetSceneByName(sceneName);
+        GameObject winAnimationObject = findObjectInSceneByName(animacao, sceneName);
+        ReturnToMenu winAnimationScript = winAnimationObject.GetComponentInChildren<ReturnToMenu>();
+        winAnimationScript.sinalSair.AddListener(() => {
+            unloadScene(sceneName);
             instantiateMenu();
         });
     }
 
-    IEnumerator loadLCrashScene(){
-        unloadScene(nameGameScene);
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(nameLCrashScene, LoadSceneMode.Additive);
-        
-        // aguarda a cena carregar
-        while (!asyncLoad.isDone)
-            yield return null;
-
-        Scene animacao = SceneManager.GetSceneByName(nameLCrashScene);
-        GameObject CrashAnimationObject = findObjectInSceneByName(animacao, "Crash Animation");
-        CrashAnimation CrashAnimationScript = CrashAnimationObject.GetComponentInChildren<CrashAnimation>();
-        CrashAnimationScript.sinalSair.AddListener(() => {
-            unloadScene(nameLCrashScene);
-            instantiateMenu();
-        });
-    }
 
     private void crash(){
         is_in_game = false;
-        StartCoroutine(loadLCrashScene());
+        StartCoroutine(loadEndScene(nameLCrashScene));
     }
     private void noTime(){
         is_in_game = false;
-        StartCoroutine(loadLTimeScene());
+        StartCoroutine(loadEndScene(nameLTimeScene));
+    }
+    private void ganhou(){
+        is_in_game = false;
+        StartCoroutine(loadEndScene(nameWScene));
     }
 
     private void startGame(){

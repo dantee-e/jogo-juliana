@@ -1143,8 +1143,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 550357019}
-        m_TargetAssemblyTypeName: CrashAnimation, Assembly-CSharp
+      - m_Target: {fileID: 550357021}
+        m_TargetAssemblyTypeName: ReturnToMenu, Assembly-CSharp
         m_MethodName: Sair
         m_Mode: 1
         m_Arguments:
@@ -1424,8 +1424,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 550357018}
-  - component: {fileID: 550357019}
   - component: {fileID: 550357020}
+  - component: {fileID: 550357021}
   m_Layer: 0
   m_Name: Crash Animation
   m_TagString: Untagged
@@ -1456,21 +1456,6 @@ Transform:
   - {fileID: 2125507811}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &550357019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 550357017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca0a24a036fa3bc22afceb150a7b1cfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sinalSair:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!82 &550357020
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1567,6 +1552,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &550357021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550357017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19fdcf0b25eb08b3e9e4d89bf717cfd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sinalSair:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &565966945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2655,12 +2655,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -5.074772, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1165779309}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &1165779309
 MeshRenderer:
   m_ObjectHideFlags: 0

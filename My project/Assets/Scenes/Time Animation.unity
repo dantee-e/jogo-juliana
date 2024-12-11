@@ -173,7 +173,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 34459419}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daf9db93dd7d109a7be52b4445f469ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 95beae5eca6b8f5ecbbeba83183bf100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sinalSair:
@@ -652,7 +652,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 34459422}
-        m_TargetAssemblyTypeName: TimeAnimation, Assembly-CSharp
+        m_TargetAssemblyTypeName: ReturnToMenuAnimations, Assembly-CSharp
         m_MethodName: Sair
         m_Mode: 1
         m_Arguments:
@@ -1615,12 +1615,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -6.0374527, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 545723741}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &545723741
 MeshRenderer:
   m_ObjectHideFlags: 0
